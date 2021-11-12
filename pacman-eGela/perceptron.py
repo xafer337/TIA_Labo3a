@@ -54,7 +54,7 @@ class PerceptronClassifier:
         # THE AUTOGRADER WILL LIKELY DEDUCT POINTS.
 
         for iteration in range(self.max_iterations):
-            print "Starting iteration ", iteration, "..."
+            print ("Starting iteration ", iteration, "...")
             for i in range(len(trainingData)):#training data
                 pdb.set_trace()#esto es un break point para que puedas comprobar el formato de los datos
                 ########################################################################################
@@ -67,7 +67,16 @@ class PerceptronClassifier:
                 #          Recordad tambien que es una clasificacion multiclase en este caso. Hay tantas clases como nos marca el atributo self.legalLabels
                 #########################################################################################
                 "*** YOUR CODE HERE ***"
-
+                labels=self.legalLabels
+                datos=trainingData[i]
+                datosLabel=trainingLabels[i]
+                puntuacion=util.Counter()
+                for j in labels:
+                    puntuacion[j]=self.weights[j]*datos
+                probabilidad=puntuacion.argMax()
+                if (probabilidad != datosLabel):
+                    self.weights[probabilidad] -= datos
+                    self.weights[datosLabel] += datos
 
 
     def classify(self, data ):
