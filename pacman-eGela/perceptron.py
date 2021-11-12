@@ -69,6 +69,7 @@ class PerceptronClassifier:
                 "*** YOUR CODE HERE ***"
 
 
+
     def classify(self, data ):
         """
         Classifies each datum as the label that most closely matches the prototype vector
@@ -92,6 +93,10 @@ class PerceptronClassifier:
         featuresWeights = []
 
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        features=self.features
+        pesos=util.Counter()
+        for f in features:
+            pesos[f]=self.weights[label][f]
+        featuresWeights=pesos.sortedKeys()[:100]
 
         return featuresWeights
