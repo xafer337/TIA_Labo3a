@@ -74,7 +74,7 @@ class PerceptronClassifier:
                 for j in labels:
                     puntuacion[j]=self.weights[j]*datos
                 probabilidad=puntuacion.argMax()
-                if (probabilidad != datosLabel):
+                if probabilidad != datosLabel:
                     self.weights[probabilidad] -= datos
                     self.weights[datosLabel] += datos
 

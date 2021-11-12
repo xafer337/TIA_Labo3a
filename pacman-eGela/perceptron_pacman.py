@@ -47,7 +47,16 @@ class PerceptronClassifierPacman(PerceptronClassifier):
         # THE AUTOGRADER WILL LIKELY DEDUCT POINTS.
 
         for iteration in range(self.max_iterations):
-            print "Starting iteration ", iteration, "..."
+            print ("Starting iteration ", iteration, "...")
             for i in range(len(trainingData)):
                 "*** YOUR CODE HERE ***"
-                util.raiseNotDefined()
+                puntuacion=util.Counter()
+                labels=self.legalLabels
+                datos=trainingData[i]
+                datosLabel=trainingLabels[i]
+                for j in labels:
+                    puntuacion[j]=self.weights * datos
+                predicha=self.classify([datos])[0]
+                if predicha != datosLabel:
+                    self.weights += trainingLabels
+                    self.weights -= predicha
