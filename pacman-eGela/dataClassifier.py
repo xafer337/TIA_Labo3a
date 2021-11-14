@@ -75,8 +75,32 @@ def enhancedFeatureExtractorDigit(datum):
     features =  basicFeatureExtractorDigit(datum)
 
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
-
+    altura=range(DIGIT_DATUM_HEIGHT)
+    anchura=range(DIGIT_DATUM_WIDTH)
+    f1=0
+    f2=0
+    f3=0
+    f4=0
+    cont=0
+    for i in altura:
+        for j in anchura:
+            cont+=1
+            features[(i,j)]=datum.getPixel(i,j)
+            if f2==0 and features[(i,j)]>0:
+                f2=1
+            elif f2==1 and features[(i,j)]<=0:
+                f3=1
+            elif f2==1  and f3==1 and features[(i,j)]>0:
+                f4=1
+            elif f3==1 and f4==1 and f2==1 and features[(i,j)]==0:
+                f1+=1
+                f2=0
+                f3=0
+                f4=0
+            if f1 <=0:
+                features[cont]=features[(i,j)]
+            else:
+                features[cont]=1
     return features
 
 
