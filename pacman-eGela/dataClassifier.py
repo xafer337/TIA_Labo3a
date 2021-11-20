@@ -149,28 +149,31 @@ def enhancedPacmanFeatures(state, action):
     pac=state.getPacmanPosition()
     ghostPositions=state.getGhostPositions()
     "*** YOUR CODE HERE ***"
-    minD=9999
+    capsulas=state.getCapsules()
+    minD=float("inf")
     for food in foods:
         d=util.manhattanDistance(food,pac)
         minD=min(d,minD)
-
-    if minD!=9999:
-        features["closest food"] = 1.0/minD #con esto te da 4
-        #features["closest food"] = minD#con esto te da 2 puntos
+    if minD!=float("inf"):
+        features["comida cercana"] = 1.0/minD
     else:
-        features["closest food"] = 2
+        features["comida cercana"] = 2
 
-    #if features["closest food"]==0:
-        #pdb.set_trace()
-
-
-    minD=10000000000
-    for ghost in state.getGhostPositions():
+    minD=float("inf")
+    for ghost in ghostPositions:
         d=util.manhattanDistance(pac,ghost) 
         minD=min(d,minD)
 
-    features["closest ghost"] = minD#1/pow(minD,2)
+    features["fantasma cercano"] = minD
 
+    minD=float("inf")
+    for capsula in capsulas:
+        d=util.manhattanDistance(pac, capsula)
+        if d == 0:
+            minD=min(d,minD)
+        else:
+             minD=min(d,minD)*2
+    features["capsula cercana"] = 1/minD
     return features
 
 
