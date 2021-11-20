@@ -163,14 +163,17 @@ def enhancedPacmanFeatures(state, action):
     for ghost in ghostPositions:
         d=util.manhattanDistance(pac,ghost) 
         minD=min(d,minD)
-
-    features["fantasma cercano"] = minD
+    if minD==0:
+        minD+=1
+    features["fantasma cercano"] = 1/minD
 
     minD=float("inf")
     for capsula in capsulas:
         d=util.manhattanDistance(pac, capsula)
         if d == 0:
             minD=min(d,minD)
+            if minD==0:
+                minD+=1
         else:
              minD=min(d,minD)*2
     features["capsula cercana"] = 1/minD
