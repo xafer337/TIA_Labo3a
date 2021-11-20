@@ -51,12 +51,12 @@ class PerceptronClassifierPacman(PerceptronClassifier):
             for i in range(len(trainingData)):
                 "*** YOUR CODE HERE ***"
                 puntuacion=util.Counter()
-                labels=self.legalLabels
                 datos=trainingData[i]
-                datosLabel=trainingLabels[i]
-                for j in labels:
-                    puntuacion[j]=self.weights * datos
-                predicha=self.classify([datos])[0]
-                if predicha != datosLabel:
-                    self.weights += trainingLabels
-                    self.weights -= predicha
+                misLabels=trainingLabels[i]
+                datos, legal = trainingData[i]
+                for j in legal:
+                    puntuacion[j]=self.weights * datos[j]
+                probabilidad=puntuacion.argMax()
+                if probabilidad != misLabels:
+                    self.weights -= datos[probabilidad]
+                    self.weights += datos[misLabels]
