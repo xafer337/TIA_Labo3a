@@ -51,7 +51,6 @@ class PerceptronClassifierPacman(PerceptronClassifier):
             for i in range(len(trainingData)):
                 "*** YOUR CODE HERE ***"
                 puntuacion=util.Counter()
-                datos=trainingData[i]
                 misLabels=trainingLabels[i]
                 datos, legal = trainingData[i]
                 for j in legal:
